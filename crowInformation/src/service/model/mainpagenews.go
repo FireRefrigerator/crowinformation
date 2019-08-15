@@ -32,8 +32,11 @@ func ConsumeNewsUrl() {
 	sigleUrl := PopFromQueue(URL_QUEUE)
 	htmlstr := util.GetResStr(sigleUrl)
 	fmt.Println(htmlstr)
-	news := News{id:"0",title:"aa",text:"nihao",publishdate:"2019/08/14",autor:"bin"}
-	AddNews(news)
+	 news := News{Title:"aa",Text:"nihao",Publishdate:"2019/08/14",Autor:"bin"}
+	 AddNews(&news)
+	// user := UserInfo{Id: 3, Username: "wb", Password: "pp"}
+	// 需要传入指针变量
+	// AddUserInfo(&user)
 	fmt.Println("add news success")
 }
 
