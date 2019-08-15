@@ -5,16 +5,28 @@ import (
 	"fmt"
 )
 
+// Id 设置成int64才行，不然一直报错
 type News struct {
-	id string
-	title string
-	autor string
-	text string
-	publishdate string
+	Id      int64
+	Title   string
+	Autor   string
+	Text    string
+	Publishdate string
 }
 
-func AddNews(n News) {
+type UserInfo struct {
+	Id       int64
+	Username string
+	Password string
+}
+
+func AddNews(n *News) {
 	fmt.Println("create news")
 	dao.CreateNews(n)
+}
+
+func AddUserInfo(u *UserInfo) {
+	fmt.Println("create user_info")
+	dao.CreateNews(u)
 }
 
