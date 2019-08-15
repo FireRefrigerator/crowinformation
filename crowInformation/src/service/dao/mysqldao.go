@@ -1,27 +1,31 @@
 package dao
 
 import (
-	"service/model"
 	"github.com/astaxie/beego/orm"
+	_ "github.com/go-sql-driver/mysql"
+
+	"fmt"
 )
 
 type MysqlDao struct {
-	orm.Ormer
+	o orm.Ormer
 }
 
 var mysqlDao MysqlDao
 
-func init() {
+func (d *MysqlDao) Connect(om interface{}) {
+	fmt.Println("connect mysql success")
 	orm.RegisterDataBase("default", "mysql", "root:root@tcp(127.0.0.1:3306)/test?charset=utf8", 30)
-	orm.RegisterModel(new(model.News))
-	mysqlDao = orm.NewOrm()
+	orm.RegisterModel(om)
+	mysqlDao.o = orm.NewOrm()
+	fmt.Println("connect mysql success")
 }
 
-func (d *MysqlDao) CreateN(n model.News){
-	mysqlDao.Insert(n)
+func (d *MysqlDao) CreateN(n interface{}){
+	mysqlDao.o.Insert(n)
 }
 
-func (d *MysqlDao) GetNById(id string) model.News {
+func (d *MysqlDao) GetNById(id string) interface{} {
 	return nil
 }
 
@@ -29,6 +33,6 @@ func (d *MysqlDao) DeleteNById(id string) {
 
 }
 
-func (d *MysqlDao) UpdateN(n model.News) {
+func (d *MysqlDao) UpdateN(n interface{}) {
 
 }
