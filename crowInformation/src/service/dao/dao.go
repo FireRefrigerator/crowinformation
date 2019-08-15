@@ -1,14 +1,12 @@
 package dao
 
-import (
-	"service/model"
-)
 
 type DaoAPI interface {
-	CreateN(n model.News)
-	GetNById(id string) model.News
+	CreateN(n interface{})
+	GetNById(id string) interface{}
 	DeleteNById(id string)
-	UpdateN(n model.News)
+	UpdateN(n interface{})
+	Connect(om interface{})
 }
 
 var daoAPI DaoAPI
@@ -17,8 +15,13 @@ func SetDaoAPI(d DaoAPI) {
 	daoAPI = d
 }
 
-func GetDaoAPI() {
+func GetDaoAPI() DaoAPI {
 	return daoAPI
+}
+
+func Connect(om interface{}) {
+	GetCurrentDaoAPI()
+	daoAPI.Connect(om)
 }
 
 func GetCurrentDaoAPI() {
@@ -27,12 +30,12 @@ func GetCurrentDaoAPI() {
 	}
 }
 
-func CreateNews(n model.News) {
+func CreateNews(n interface{}) {
 	GetCurrentDaoAPI()
 	daoAPI.CreateN(n)
 }
 
-func UpdateNews(n model.News) {
+func UpdateNews(n interface{}) {
 	GetCurrentDaoAPI()
 	daoAPI.UpdateN(n)
 }
