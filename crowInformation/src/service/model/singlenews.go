@@ -1,16 +1,16 @@
 package model
 
 import (
-	"service/dao"
 	"fmt"
+	"service/dao"
 )
 
 // Id 设置成int64才行，不然一直报错
 type News struct {
-	Id      int64
-	Title   string
-	Autor   string
-	Text    string
+	Id          int64
+	Title       string
+	Autor       string
+	Content     string
 	Publishdate string
 }
 
@@ -29,4 +29,3 @@ func AddUserInfo(u *UserInfo) {
 	fmt.Println("create user_info")
 	dao.CreateNews(u)
 }
-

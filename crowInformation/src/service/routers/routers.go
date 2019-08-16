@@ -8,4 +8,5 @@ import (
 
 func init() {
 	beego.Router("/api/v1/crowNews", &controllers.CrowNewsControllers{}, "*:CrowNews")
+	beego.Router("/api/v1/crowNewsUrl", &controllers.CrowNewsControllers{}, "*:CrowNewsUrl")
 }
