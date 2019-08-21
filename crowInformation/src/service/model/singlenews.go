@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"github.com/astaxie/beego/orm"
 	"service/dao"
 )
 
@@ -28,4 +29,10 @@ func AddNews(n *News) {
 func AddUserInfo(u *UserInfo) {
 	fmt.Println("create user_info")
 	dao.CreateNews(u)
+}
+
+func init() {
+	// 官方推荐
+	orm.RegisterModel(new(News), new(UserInfo))
+	// orm.RegisterModel(new(UserInfo))
 }
