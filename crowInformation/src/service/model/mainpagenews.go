@@ -16,28 +16,33 @@ func ProductNewsUrl(htmlurl string) {
 	fmt.Println("begin product news url!")
 	html := util.GetResStr(htmlurl)
 	// 如何判断地址是否有效，后面考虑
-	htmlstr, _ := html.String()
-	// 正则需要输出的字符串放在(.*)里，过滤/2019-08-12还需学习
-	// fmt.Println(htmlstr)
+	htmlstr, err := html.String()
+	if err != nil {
+		fmt.Println("Get html err, ", err.Error())
+	}
+
 	rule := `<a href="(http://sports.sina.com.cn/basketball/nba/.*.shtml)" target="_blank">`
 	reg := regexp.MustCompile(rule)
 	result := reg.FindAllStringSubmatch(htmlstr, -1)
 
 	for i := 0; i < len(result); i++ {
 		if !ISVist(URL_VIST_SET, result[i][1]) {
-			// fmt.Println("product news", result[i][1])
 			PutinQueue(URL_QUEUE, result[i][1])
 			AddToSet(URL_VIST_SET, result[i][1])
 		}
 	}
-
+	fmt.Printf("Product url with %s finish", htmlurl)
 }
 
 func ConsumeNewsUrl() {
+	// 是否需要使用信号量channel来控制消费，后续思考
 	for {
 		newsUrl := PopFromQueue(URL_QUEUE)
-		newsstr, _ := util.GetResStr(newsUrl).String()
-		fmt.Println(newsstr)
+		newsstr, err := util.GetResStr(newsUrl).String()
+		if err != nil {
+			fmt.Printf("avidid news url, %s", newsUrl)
+			continue
+		}
 		// 可能是不同的mysql版本要求，这个Id不传就会插入失败(最新：数据库id为主键递增就可以不传)
 		title := getTitle(newsstr)
 		content := getContent(newsstr)
@@ -46,11 +51,7 @@ func ConsumeNewsUrl() {
 		news := News{Title: title, Content: content, Publishdate: publishdate, Autor: autor}
 		AddNews(&news)
 		time.Sleep(time.Second)
-		// user := UserInfo{Id: 3, Username: "wb", Password: "pp"}
-		// 需要传入指针变量
-		// AddUserInfo(&user)
 	}
-	fmt.Println("add news success")
 }
 
 func getTitle(news string) string {
