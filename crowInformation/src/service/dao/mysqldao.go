@@ -13,10 +13,8 @@ type MysqlDao struct {
 
 var mysqlDao MysqlDao
 
-func (d *MysqlDao) Connect(om interface{}) {
-	fmt.Println("connect mysql success")
+func (d *MysqlDao) Connect() {
 	orm.RegisterDataBase("default", "mysql", "root:root@tcp(127.0.0.1:3306)/test?charset=utf8", 30)
-	orm.RegisterModel(om)
 	mysqlDao.o = orm.NewOrm()
 	fmt.Println("connect mysql success")
 }
