@@ -6,7 +6,7 @@ type DaoAPI interface {
 	GetNById(id string) interface{}
 	DeleteNById(id string)
 	UpdateN(n interface{})
-	Connect(om interface{})
+	Connect()
 }
 
 var daoAPI DaoAPI
@@ -19,11 +19,12 @@ func GetDaoAPI() DaoAPI {
 	return daoAPI
 }
 
-func Connect(om interface{}) {
+func Init() {
 	GetCurrentDaoAPI()
-	daoAPI.Connect(om)
+	daoAPI.Connect()
 }
 
+// 可通过传参初始化不同的domain
 func GetCurrentDaoAPI() {
 	if daoAPI == nil {
 		daoAPI = &MysqlDao{}
