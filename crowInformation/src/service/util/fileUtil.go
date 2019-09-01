@@ -31,6 +31,25 @@ func main() {
 	fmt.Println(b)
 	os.Exit(0)
 }
+func tetByteString() {
+	var b = []byte{104, 101, 108}
+	// b = append(b, 104, 101, 108)
+	fmt.Println(getStringfrombyte(b))
+	// fmt.Println(getbyteFromstring("hello"))
+}
+
+func getRandInt() int {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(100)
+}
+
+func getStringfrombyte(b []byte) string {
+	return string(b)
+}
+
+func getbyteFromstring(str string) []byte {
+	return []byte(str)
+}
 
 // 定义一个函数类型
 type Op func(int64, int64) int64
