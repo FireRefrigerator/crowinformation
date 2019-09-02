@@ -13,7 +13,7 @@
 //	defer w.Done()
 //	fmt.Println("a")
 //}
-
+// 等待所有协程执行完成
 func main() {
 	//chann := make(chan int, 10)
 	//for i := 0; i < 10; i++ {
