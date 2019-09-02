@@ -7,22 +7,6 @@ import (
 	"os"
 )
 
-//import (
-//	_ "service/routers"
-//	_ "service/model"
-//	_ "service/dao"
-//
-//	"github.com/astaxie/beego"
-//	"fmt"
-//)
-//
-//func main() {
-//	fmt.Println("Hello crow news!")
-//	// dao.Connect(new(model.UserInfo))
-//	// dao.Connect(new(model.News))
-//	beego.Run()
-//}
-
 func main() {
 
 	var s = Do(add, 2,3)
@@ -31,7 +15,7 @@ func main() {
 	fmt.Println(b)
 	os.Exit(0)
 }
-func tetByteString() {
+func testByteString() {
 	var b = []byte{104, 101, 108}
 	// b = append(b, 104, 101, 108)
 	fmt.Println(getStringfrombyte(b))
