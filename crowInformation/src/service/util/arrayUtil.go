@@ -87,9 +87,7 @@ func quickSort(arr []int, left, right int) {
 			i++
 		}
 		// 交换数组中两个元素位置
-		t := arr[i]
-		arr[i] = arr[j]
-		arr[j] = t
+		arr[i],arr[j]=arr[j],arr[i]
 	}
 	// 准基数归位
 	arr[left] = arr[i]
