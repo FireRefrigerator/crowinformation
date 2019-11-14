@@ -1,3 +1,5 @@
+package fileUtil
+
 func Contains(target interface{}, obj interface{}) bool {
 	targetValue := reflect.ValueOf(target)
 	switch reflect.TypeOf(target).Kind() {
